@@ -202,6 +202,13 @@ func (a *Merchant) UpdateNotifyUrl(agency, username, notifyUrl string) error {
 	})
 }
 
+func (a *Merchant) UpdateBuyStatus(agency, username string, buyStatus int) error {
+	session := models.NewSession()
+	return models.NewMerchantModel(session).EditMerchant(agency, username, map[string]int{
+		"buy_status": buyStatus,
+	})
+}
+
 func (a *Merchant) Count() (int64, error) {
 	session := models.NewSession()
 	return models.NewMerchantModel(session).GetMerchantTotal(a.getMaps())

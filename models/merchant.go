@@ -16,6 +16,8 @@ type Merchant struct {
 	ReturnUrl string `json:"-" gorm:"return_url"`
 	// 商家接口回调url
 	NotifyUrl string `json:"-" gorm:"notify_url"`
+	// 账户买入状态（1：暂停，2：启用）
+	BuyStatus int `json:"buy_status" gorm:"buy_status"`
 	// 商家公钥
 	MerchantPublicKey string `json:"-" gorm:"column:merchant_public_key"`
 	// 商家私钥

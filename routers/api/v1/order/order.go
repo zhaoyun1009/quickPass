@@ -76,6 +76,11 @@ func Buy(c *gin.Context) {
 		app.ErrorResp(c, e.ERROR_NOT_EXIST_MERCHANT, "")
 		return
 	}
+	// 判断商家可买入状态
+	if merchant.BuyStatus == constant.SwitchClose {
+		app.ErrorResp(c, e.MerchantBuyStatusClosed, "")
+		return
+	}
 	// 4.设置订单超时监听
 	//订单超时时间
 	duration := time.Minute * time.Duration(setting.AppSetting.OrderTimeoutMinute)

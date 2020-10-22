@@ -43,6 +43,13 @@ func Buy(c *gin.Context) {
 		app.ErrorResp(c, e.ERROR_NOT_EXIST_MERCHANT, "")
 		return
 	}
+
+	// 判断商家可买入状态
+	if merchant.BuyStatus == constant.SwitchClose {
+		app.ErrorResp(c, e.MerchantBuyStatusClosed, "")
+		return
+	}
+
 	jsonData, _ := json.Marshal(data)
 	// 过滤特殊字符
 	transHtmlJson := util.TransHtmlJson(jsonData)

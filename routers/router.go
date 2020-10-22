@@ -162,6 +162,9 @@ func InitRouter() *gin.Engine {
 		apiV1Agency.POST("/updateAcceptStatus", acceptor.AgencyUpdateAcceptStatus)
 		//代理更新自动承兑
 		apiV1Agency.POST("/updateIfAutoAccept", acceptor.AgencyUpdateIfAutoAccept)
+
+		// 代理更新商家买入状态
+		apiV1Agency.POST("/updateMerchantBuyStatus", merchant.AgencyUpdateMerchantBuyStatus)
 	}
 
 	//普通用户

@@ -142,8 +142,9 @@ const (
 
 	ERROR_IP_RISK = 30010
 
-	Insufficient         = 40001
-	AcceptorStatusClosed = 40002
-	ExistUsername        = 40003
-	CheckRsaError        = 40004
+	Insufficient            = 40001
+	AcceptorStatusClosed    = 40002
+	ExistUsername           = 40003
+	CheckRsaError           = 40004
+	MerchantBuyStatusClosed = 40005
 )

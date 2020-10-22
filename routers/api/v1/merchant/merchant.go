@@ -605,3 +605,24 @@ func GetApiCallUrl(c *gin.Context) {
 		NotifyUrl: merchant.NotifyUrl,
 	})
 }
+
+func AgencyUpdateMerchantBuyStatus(c *gin.Context) {
+	var (
+		form request.ReqAgencyUpdateMerchantBuyStatusFrom
+	)
+	err := app.BindAndValid(c, &form)
+	if err != nil {
+		app.ErrorResp(c, e.INVALID_PARAMS, err.Error())
+		return
+	}
+
+	account := c.MustGet(util.TokenKey).(*util.Claims)
+	merchantService := merchant_service.Merchant{}
+	err = merchantService.UpdateBuyStatus(account.Agency, form.Username, form.BuyStatus)
+	if err != nil {
+		app.ErrorResp(c, e.ERROR_EDIT_MERCHANT_FAIL, err.Error())
+		return
+	}
+
+	app.SuccessResp(c, nil)
+}

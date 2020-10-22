@@ -1,13 +1,14 @@
 package e
 
 var MsgFlags = map[int]string{
-	SUCCESS:              "ok",
-	ERROR:                "fail",
-	INVALID_PARAMS:       "请求参数错误",
-	Insufficient:         "资金不足",
-	AcceptorStatusClosed: "承兑账户被冻结,无法开启承兑",
-	ExistUsername:        "此账号已存在",
-	CheckRsaError:        "验签失败",
+	SUCCESS:                 "ok",
+	ERROR:                   "fail",
+	INVALID_PARAMS:          "请求参数错误",
+	Insufficient:            "资金不足",
+	AcceptorStatusClosed:    "承兑账户被冻结,无法开启承兑",
+	ExistUsername:           "此账号已存在",
+	CheckRsaError:           "验签失败",
+	MerchantBuyStatusClosed: "商家账户买入被关闭，请联系管理员",
 
 	LOGIN_FAILED: "用户名或密码错误",
 

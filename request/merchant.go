@@ -108,3 +108,11 @@ type ReqUpdateNotifyUrl struct {
 	// 回调地址
 	NotifyUrl string `form:"notify_url" json:"notify_url" binding:"required"`
 }
+
+//代理更新承兑账户状态
+type ReqAgencyUpdateMerchantBuyStatusFrom struct {
+	//账户买入状态开关(1：暂停，2：启用)
+	BuyStatus int `form:"buy_status" json:"buy_status" binding:"required,oneof=1 2"`
+	//商家名称
+	Username string `form:"username" json:"username" binding:"required"`
+}
