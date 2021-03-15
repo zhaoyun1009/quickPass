@@ -5,7 +5,7 @@ go 1.14
 require (
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible // indirect
 	github.com/KyleBanks/depth v1.2.2-0.20190719145526-b7f67b6d8d5f // indirect
-	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
 	github.com/casbin/casbin v1.7.0
 	github.com/casbin/gorm-adapter v1.0.0
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
@@ -41,7 +41,7 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20190116191733-b6c0e53d7304 // indirect
 	github.com/sony/sonyflake v1.0.1-0.20191007075043-59cd942daa50
 	github.com/swaggo/gin-swagger v1.2.1-0.20191128052709-3db8327ddbc9
-	github.com/swaggo/swag v1.6.6-0.20200208074533-f150c139699a
+	github.com/swaggo/swag v1.6.6-0.20200208074533-f150c139699a // indirect
 	golang.org/x/sys v0.0.0-20200202164722-d101bd2416d5 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/ini.v1 v1.56.0 // indirect
