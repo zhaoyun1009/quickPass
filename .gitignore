@@ -20,3 +20,5 @@ output/
 
 # runtime
 runtime/
+
+conf/app.ini

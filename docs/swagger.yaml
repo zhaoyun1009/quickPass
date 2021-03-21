@@ -1,0 +1,4150 @@
+definitions:
+  app.Response:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      errMsg:
+        type: string
+      msg:
+        type: string
+    type: object
+  management.modifyPasswordForm:
+    properties:
+      agency:
+        type: string
+      original_password:
+        type: string
+      update_password:
+        type: string
+      user_name:
+        type: string
+    type: object
+  management.updateManagementInfoForm:
+    properties:
+      agency:
+        type: string
+      full_name:
+        type: string
+      phone_number:
+        type: string
+      user_name:
+        type: string
+    type: object
+  models.AbnormalOrder:
+    properties:
+      abnormal_order_no:
+        description: 异常单号
+        type: string
+      abnormal_order_status:
+        description: 订单状态（1：未处理  2：已处理  3：处理中）
+        type: integer
+      abnormal_order_type:
+        description: '异常类型（1: 未知, 2：超时取消，3：未生成订单， 4：订单金额不符）'
+        type: integer
+      accept_card_account:
+        description: 收款账户
+        type: string
+      accept_card_bank:
+        description: 银行名称
+        type: string
+      accept_card_no:
+        description: 收款卡号
+        type: string
+      agency:
+        description: 代理
+        type: string
+      amount:
+        description: 金额
+        type: integer
+      append_info:
+        description: 摘要
+        type: string
+      channel:
+        description: 收款通道({“BANK_CARD":"银行卡","ALIPAY":"支付宝","WECHAT":"微信"})
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      finish_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 完成时间
+      id:
+        type: integer
+      nickname:
+        description: 昵称
+        type: string
+      original_order_no:
+        description: 原始订单号
+        type: string
+      payment_date:
+        $ref: '#/definitions/util.JSONTime'
+        description: 付款日期
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+      username:
+        description: 用户名
+        type: string
+    type: object
+  models.Acceptor:
+    properties:
+      accept_status:
+        description: 承兑账户状态(1：关闭，2：开启)
+        type: integer
+      accept_switch:
+        description: 承兑开关(1：关闭，2：开启)
+        type: integer
+      acceptor:
+        description: 承兑人账号
+        type: string
+      agency:
+        description: 所属代理
+        type: string
+      count_ali_pay:
+        description: 支付宝数量
+        type: integer
+      count_bank_card:
+        description: 银行卡数量
+        type: integer
+      count_we_chat:
+        description: 微信数量
+        type: integer
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      deposit:
+        description: 保证金
+        type: integer
+      frozen_amount:
+        description: 冻结资金
+        type: integer
+      id:
+        type: integer
+      if_auto_accept:
+        description: 是否自动承兑（1：不自动，2：自动）
+        type: integer
+      max_accepted_amount:
+        description: 最大承兑金额
+        type: integer
+      min_accepted_amount:
+        description: 最小承兑金额
+        type: integer
+      nickname:
+        description: 承兑人昵称
+        type: string
+      today_accept_amount:
+        description: 今日承兑金额
+        type: integer
+      total_amount:
+        description: |-
+          --------------------------------------
+          总资金
+        type: integer
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+    type: object
+  models.AcceptorCard:
+    properties:
+      acceptor:
+        description: 承兑人账号
+        type: string
+      agency:
+        description: 代理
+        type: string
+      card_account:
+        description: 卡账户名
+        type: string
+      card_bank:
+        description: 银行名称
+        type: string
+      card_img:
+        description: 图片地址
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 银行支行
+        type: string
+      card_type:
+        description: 卡类型={“BANK_CARD":"银行卡","ALIPAY":"支付宝","WECHAT":"微信"}
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      day_available_amt:
+        description: 当日剩余可用流水
+        type: integer
+      day_frozen_amount:
+        description: 单日冻结流水
+        type: integer
+      day_max_amt:
+        description: 当日最大流水
+        type: integer
+      delete_flag:
+        description: 删除标记（1：未删除，2：已删除）
+        type: integer
+      id:
+        type: integer
+      if_open:
+        description: 是否开启={1:关闭，2：开启}
+        type: integer
+      last_match_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 上一次的匹配时间
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+    type: object
+  models.Bill:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      amount:
+        description: 涉及金额
+        type: integer
+      append_info:
+        description: 摘要信息
+        type: string
+      bill_no:
+        description: 账单号
+        type: string
+      business_type:
+        description: 会计科目（1：转账，2：转账手续费，3：收款手续费，4：OTC买入放行，5：OTC买入手续费 6：OTC提现手续费，7：OTC卖出提现放行
+        type: integer
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      current_rate:
+        description: 当前汇率
+        type: string
+      frozen_amount:
+        description: 当前冻结金额
+        type: integer
+      id:
+        type: integer
+      income_expenses_type:
+        description: 收支类型（1：支出，2：收入）
+        type: integer
+      merchant_order_no:
+        description: 商家订单编号
+        type: string
+      opposite_role:
+        description: 对方角色（1:代理，2：承兑人、3：商家）
+        type: integer
+      opposite_user_name:
+        description: 对方交易账号
+        type: string
+      order_no:
+        description: 订单编号
+        type: string
+      own_role:
+        description: 角色（1:代理，2：承兑人、3：商家）
+        type: integer
+      own_user_name:
+        description: 已方交易账号
+        type: string
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+      usable_amount:
+        description: 当前可用金额
+        type: integer
+    type: object
+  models.BillStatistics:
+    properties:
+      accept_amount:
+        description: 承兑金额
+        type: integer
+      accept_count:
+        description: 承兑次数
+        type: integer
+      agency:
+        description: 代理
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      id:
+        type: integer
+      left_amount:
+        description: 剩余金额
+        type: integer
+      recharge_amount:
+        description: 充值金额
+        type: integer
+      recharge_count:
+        description: 充值次数
+        type: integer
+      role:
+        description: 角色
+        type: integer
+      statistics_date:
+        description: 统计日期
+        type: string
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+      username:
+        description: 用户名
+        type: string
+      withdrawal_amount:
+        description: 提现金额
+        type: integer
+      withdrawal_count:
+        description: 提现次数
+        type: integer
+    type: object
+  models.Channel:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      append_info:
+        description: 通道补充信息
+        type: string
+      buy_max:
+        description: 买入最大限额
+        type: integer
+      buy_min:
+        description: 买入最小限额
+        type: integer
+      channel:
+        description: 通道名称
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      id:
+        type: integer
+      if_open:
+        description: '通道开关(1: 关闭  2:开启)'
+        type: integer
+      limit_amount:
+        description: 单账户每日承兑上限
+        type: integer
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+    type: object
+  models.Management:
+    properties:
+      agency:
+        description: 代理名称
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      full_name:
+        description: 姓名
+        type: string
+      id:
+        type: integer
+      password:
+        description: 密码
+        type: string
+      phone_number:
+        description: 电话号码
+        type: string
+      role:
+        description: 角色（1：管理员，2：客服，3：财务）
+        type: integer
+      rules:
+        description: 权限列表(如：order,user,merchant,acceptor)
+        type: string
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+      user_name:
+        description: 后台账号
+        type: string
+    type: object
+  models.Merchant:
+    properties:
+      agency:
+        description: 所属代理
+        type: string
+      buy_status:
+        description: 账户买入状态（1：暂停，2：启用）
+        type: integer
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      frozen_amount:
+        description: 冻结资金
+        type: integer
+      id:
+        description: 主键id
+        type: integer
+      merchant_name:
+        description: 商家账号
+        type: string
+      nickname:
+        description: 昵称
+        type: string
+      rate:
+        description: 商家汇率列表
+        items:
+          $ref: '#/definitions/models.MerchantRate'
+        type: array
+      today_accept_amount:
+        description: 今日承兑金额
+        type: integer
+      total_amount:
+        description: |-
+          --------------------------------------
+          总资金
+        type: integer
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+    type: object
+  models.MerchantCard:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      card_account:
+        description: 卡账户名
+        type: string
+      card_bank:
+        description: 银行名称
+        type: string
+      card_img:
+        description: 图片地址
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 银行支行
+        type: string
+      card_type:
+        description: 卡类型={“BANK_CARD":"银行卡","ALIPAY":"支付宝","WECHAT":"微信"}
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      id:
+        type: integer
+      merchant:
+        description: 商家账号
+        type: string
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+    type: object
+  models.MerchantRate:
+    properties:
+      agency:
+        description: 所属代理
+        type: string
+      channel:
+        description: 通道名称
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      id:
+        description: 主键id
+        type: integer
+      merchant_name:
+        description: 商家账号
+        type: string
+      rate:
+        description: 通道汇率
+        type: integer
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+    type: object
+  models.Order:
+    properties:
+      abnormal_order_no:
+        description: 异常单号
+        type: string
+      acceptor_nickname:
+        description: 订单所匹配的承兑人昵称
+        type: string
+      agency:
+        description: 代理
+        type: string
+      amount:
+        description: 金额
+        type: integer
+      append_info:
+        description: 摘要
+        type: string
+      callback_info:
+        description: 回调失败的信息
+        type: string
+      callback_status:
+        description: 回调结果（1、未处理，2、回调成功，3、回调失败）
+        type: integer
+      callback_url:
+        description: 回调地址
+        type: string
+      card_account:
+        description: 卡账户名
+        type: string
+      card_bank:
+        description: 银行名称
+        type: string
+      card_img:
+        description: 收款码
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 银行支行
+        type: string
+      channel_type:
+        description: 通道类型= (BANK_CARD,ALIPAY,WECHAT)
+        type: string
+      client_ip:
+        description: ip地址
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      finish_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 订单完成时间
+      from_user_name:
+        description: 发起者账号
+        type: string
+      id:
+        type: integer
+      merchant_order_no:
+        description: 商家平台传过来的订单号
+        type: string
+      merchant_user_name:
+        description: 商家账号
+        type: string
+      order_no:
+        description: 订单号
+        type: string
+      order_status:
+        description: 订单状态（1：创建，2：待支付，3：待放行，4：已取消  5：已失败  6：已完成）
+        type: integer
+      order_type:
+        description: 订单类型（1：转账，2：买入，3：卖出）
+        type: integer
+      submit_type:
+        description: 提交类型=（1：直接提交，2：接口提交）
+        type: integer
+      to_user_name:
+        description: 接受者账号
+        type: string
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+    type: object
+  models.User:
+    properties:
+      address:
+        description: 地址
+        type: string
+      agency:
+        description: 所属代理
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      full_name:
+        description: 姓名
+        type: string
+      id:
+        description: 主键id
+        type: integer
+      password:
+        description: 登录密码
+        type: string
+      phone_number:
+        description: 电话号码
+        type: string
+      role:
+        description: 角色（1:代理，2：承兑人、3：商家）
+        type: integer
+      secret_key:
+        description: token盐值
+        type: string
+      status:
+        description: 账户状态（1：暂停，2：启用）
+        type: integer
+      trade_key:
+        description: 交易密码
+        type: string
+      type:
+        description: 账户类型(1:系统账户 2:普通账户)
+        type: integer
+      update_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 更新时间
+      user_name:
+        description: 用户名
+        type: string
+    type: object
+  request.ReqAcceptorDischargeForm:
+    properties:
+      order_no:
+        description: 订单号
+        type: string
+      trade_key:
+        description: 交易密码
+        type: string
+    required:
+    - order_no
+    - trade_key
+    type: object
+  request.ReqAddAcceptorAbnormalOrderFrom:
+    properties:
+      accept_card_account:
+        description: 收款账户
+        type: string
+      accept_card_bank:
+        description: 收款卡银行
+        type: string
+      accept_card_no:
+        description: 收款卡号
+        type: string
+      amount:
+        description: 金额
+        type: integer
+      channel:
+        description: 收款通道({“BANK_CARD":"银行卡","ALIPAY":"支付宝","WECHAT":"微信"})
+        type: string
+      payment_date:
+        description: 收款时间
+        type: string
+    required:
+    - accept_card_account
+    - accept_card_no
+    - amount
+    - channel
+    - payment_date
+    type: object
+  request.ReqAddAcceptorCardForm:
+    properties:
+      card_account:
+        description: 卡账户名
+        type: string
+      card_bank:
+        description: 银行名称
+        type: string
+      card_img:
+        description: 卡图片
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 支行
+        type: string
+      card_type:
+        description: 卡类型={“BANK_CARD":"银行卡","ALIPAY":"支付宝","WECHAT":"微信"}
+        type: string
+    required:
+    - card_account
+    - card_no
+    - card_type
+    type: object
+  request.ReqAddAcceptorForm:
+    properties:
+      address:
+        description: 地址
+        type: string
+      full_name:
+        description: 承兑人姓名
+        type: string
+      password:
+        description: 密码
+        type: string
+      phone_number:
+        description: 电话号码
+        type: string
+      user_name:
+        description: 承兑人账户名
+        type: string
+    required:
+    - address
+    - full_name
+    - password
+    - phone_number
+    - user_name
+    type: object
+  request.ReqAddAgencyUserForm:
+    properties:
+      address:
+        description: 地址
+        type: string
+      full_name:
+        description: 代理昵称
+        type: string
+      password:
+        description: 代理密码
+        type: string
+      phone_number:
+        description: 电话号码
+        type: string
+      user_name:
+        description: 代理账户名
+        type: string
+    required:
+    - address
+    - full_name
+    - password
+    - phone_number
+    - user_name
+    type: object
+  request.ReqAddMerchantCard:
+    properties:
+      card_account:
+        description: 卡账户名
+        type: string
+      card_bank:
+        description: 银行名称
+        type: string
+      card_img:
+        description: 卡图片
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 支行
+        type: string
+      card_type:
+        description: 卡类型={“BANK_CARD":"银行卡","ALIPAY":"支付宝","WECHAT":"微信"}
+        type: string
+    required:
+    - card_account
+    - card_no
+    - card_type
+    type: object
+  request.ReqAddMerchantForm:
+    properties:
+      address:
+        description: 地址
+        type: string
+      full_name:
+        description: 商家名称
+        type: string
+      password:
+        description: 密码
+        type: string
+      phone_number:
+        description: 电话号码
+        type: string
+      rate:
+        description: 商家汇率(所有通道统一设置,默认0)
+        type: integer
+      user_name:
+        description: 商家账户名
+        type: string
+    required:
+    - address
+    - full_name
+    - password
+    - phone_number
+    - user_name
+    type: object
+  request.ReqAgencyAgainCallback:
+    properties:
+      callback_url:
+        description: 回调地址
+        type: string
+      order_no:
+        description: 订单号
+        type: string
+    required:
+    - callback_url
+    - order_no
+    type: object
+  request.ReqAgencyDischargeCancelOrderForm:
+    properties:
+      order_no:
+        description: 订单号
+        type: string
+    required:
+    - order_no
+    type: object
+  request.ReqAgencyDischargeForm:
+    properties:
+      order_no:
+        description: 订单号
+        type: string
+    required:
+    - order_no
+    type: object
+  request.ReqAgencyGetMerchantKeyForm:
+    properties:
+      trade_key:
+        description: 交易密码
+        type: string
+      username:
+        description: 商家用户名称
+        type: string
+    required:
+    - trade_key
+    - username
+    type: object
+  request.ReqAgencyResetUserPasswordForm:
+    properties:
+      username:
+        description: 用户名称
+        type: string
+    required:
+    - username
+    type: object
+  request.ReqAgencyResetUserTradeKeyForm:
+    properties:
+      username:
+        description: 用户名称
+        type: string
+    required:
+    - username
+    type: object
+  request.ReqAgencyTransferForm:
+    properties:
+      amount:
+        description: 转账金额
+        type: integer
+      append_info:
+        description: 摘要
+        type: string
+      to_user_name:
+        description: 转入用户名
+        type: string
+      trade_key:
+        description: 交易密码
+        type: string
+    required:
+    - amount
+    - to_user_name
+    - trade_key
+    type: object
+  request.ReqAgencyUpdateAcceptStatusFrom:
+    properties:
+      accept_status:
+        description: 承兑账户状态开关(1：关闭，2：开启)
+        type: integer
+      username:
+        description: 承兑人
+        type: string
+    required:
+    - accept_status
+    - username
+    type: object
+  request.ReqAgencyUpdateAcceptSwitchFrom:
+    properties:
+      accept_switch:
+        description: 承兑开关(1：关闭，2：开启)
+        type: integer
+      username:
+        description: 承兑人
+        type: string
+    required:
+    - accept_switch
+    - username
+    type: object
+  request.ReqAgencyUpdateIfAutoAcceptFrom:
+    properties:
+      if_auto_accept:
+        description: 自动承兑(1：关闭，2：开启)
+        type: integer
+      username:
+        description: 承兑人
+        type: string
+    required:
+    - if_auto_accept
+    - username
+    type: object
+  request.ReqBuyForm:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      amount:
+        description: 支付金额
+        type: integer
+      member:
+        description: 会员
+        type: string
+      merchant:
+        description: 商家
+        type: string
+      pay_type:
+        description: 支付类型(BANK_CARD,ALIPAY,WECHAT)
+        type: string
+    required:
+    - agency
+    - amount
+    - member
+    - merchant
+    - pay_type
+    type: object
+  request.ReqCancelBuyForm:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      order_no:
+        description: 订单号
+        type: string
+    required:
+    - agency
+    - order_no
+    type: object
+  request.ReqCancelSellForm:
+    properties:
+      order_no:
+        description: 订单号
+        type: string
+    required:
+    - order_no
+    type: object
+  request.ReqChannelSwitchForm:
+    properties:
+      channel_id:
+        description: 通道ID
+        type: integer
+      if_open:
+        description: '通道开关(1: 关闭  2:开启)'
+        type: integer
+    required:
+    - channel_id
+    - if_open
+    type: object
+  request.ReqConfirmPayForm:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      order_no:
+        description: 订单号
+        type: string
+    required:
+    - agency
+    - order_no
+    type: object
+  request.ReqConfirmSellPayForm:
+    properties:
+      order_no:
+        description: 订单号
+        type: string
+    required:
+    - order_no
+    type: object
+  request.ReqDeleteAcceptorCardForm:
+    properties:
+      card_id:
+        description: 卡id
+        type: integer
+    required:
+    - card_id
+    type: object
+  request.ReqGetKeyForm:
+    properties:
+      trade_key:
+        description: 交易密码
+        type: string
+    required:
+    - trade_key
+    type: object
+  request.ReqManagementLoginForm:
+    properties:
+      password:
+        description: 密码
+        type: string
+      user_name:
+        description: 用户名
+        type: string
+    required:
+    - password
+    - user_name
+    type: object
+  request.ReqMerchantDischargeSellForm:
+    properties:
+      order_no:
+        description: 订单号
+        type: string
+      trade_key:
+        description: 交易密码
+        type: string
+    required:
+    - order_no
+    - trade_key
+    type: object
+  request.ReqPasswordModifyForm:
+    properties:
+      original_password:
+        description: 原始密码
+        type: string
+      update_password:
+        description: 更新密码
+        type: string
+    required:
+    - original_password
+    - update_password
+    type: object
+  request.ReqRemoveMerchantCard:
+    properties:
+      card_id:
+        description: 卡id
+        type: integer
+    required:
+    - card_id
+    type: object
+  request.ReqRemoveMerchantForm:
+    properties:
+      user_name:
+        description: 商家账户名
+        type: string
+    required:
+    - user_name
+    type: object
+  request.ReqSellForm:
+    properties:
+      amount:
+        description: |-
+          收款信息
+          金额
+        type: integer
+      card_account:
+        description: |-
+          卡信息
+          收款人
+        type: string
+      card_bank:
+        description: 开户行
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 银行支行
+        type: string
+      card_type:
+        description: 卡类型
+        type: string
+      remark:
+        description: 备注
+        type: string
+      trade_key:
+        description: 交易密码
+        type: string
+    required:
+    - amount
+    - card_account
+    - card_type
+    - trade_key
+    type: object
+  request.ReqSettingTradeKeyForm:
+    properties:
+      trade_key:
+        description: 交易密码
+        type: string
+    required:
+    - trade_key
+    type: object
+  request.ReqSysTransferForm:
+    properties:
+      agency:
+        description: 代理 不传默认当前用户的同一代理
+        type: string
+      amount:
+        description: 转账金额
+        type: integer
+      append_info:
+        description: 摘要
+        type: string
+      to_user_name:
+        description: 转入用户名
+        type: string
+      trade_key:
+        description: 交易密码
+        type: string
+    required:
+    - agency
+    - amount
+    - to_user_name
+    - trade_key
+    type: object
+  request.ReqTradeKeyModifyForm:
+    properties:
+      original_trade_password:
+        description: 原始交易密码
+        type: string
+      update_trade_password:
+        description: 更新交易密码
+        type: string
+    required:
+    - original_trade_password
+    - update_trade_password
+    type: object
+  request.ReqUpdateAbnormalOrderFrom:
+    properties:
+      abnormal_order_no:
+        description: 异常单号
+        type: string
+      abnormal_order_type:
+        description: '异常类型（1: 未知, 2：超时取消，3：未生成订单， 4：订单金额不符）'
+        type: integer
+      amount:
+        description: 实际金额
+        type: integer
+      append_info:
+        description: 摘要
+        type: string
+      member:
+        description: 会员名称
+        type: string
+      merchant:
+        description: 商家账户
+        type: string
+    required:
+    - abnormal_order_no
+    - abnormal_order_type
+    - amount
+    - merchant
+    type: object
+  request.ReqUpdateAcceptSwitchFrom:
+    properties:
+      accept_switch:
+        description: 承兑开关(1：关闭，2：开启)
+        type: integer
+    required:
+    - accept_switch
+    type: object
+  request.ReqUpdateAcceptorCardForm:
+    properties:
+      card_account:
+        description: 卡账户名
+        type: string
+      card_bank:
+        description: 银行名称
+        type: string
+      card_id:
+        description: 卡id
+        type: integer
+      card_img:
+        description: 卡图片
+        type: string
+      card_sub_bank:
+        description: 支行
+        type: string
+    required:
+    - card_account
+    - card_id
+    type: object
+  request.ReqUpdateAllLimitAmountForm:
+    properties:
+      limit_amount:
+        description: 每日承兑上限金额
+        type: integer
+    required:
+    - limit_amount
+    type: object
+  request.ReqUpdateCardStatusForm:
+    properties:
+      card_id:
+        description: 卡id
+        type: integer
+      if_open:
+        description: 是否开启在线={1:关闭，2：开启}
+        type: integer
+    required:
+    - card_id
+    - if_open
+    type: object
+  request.ReqUpdateIfAutoAcceptFrom:
+    properties:
+      if_auto_accept:
+        description: 自动承兑(1：关闭，2：开启)
+        type: integer
+    required:
+    - if_auto_accept
+    type: object
+  request.ReqUpdateLimitAmountForm:
+    properties:
+      id:
+        description: 通道ID
+        type: integer
+      limit_amount:
+        description: 每日承兑上限金额
+        type: integer
+    required:
+    - id
+    - limit_amount
+    type: object
+  request.ReqUpdateMerchantAllChannelRate:
+    properties:
+      merchant_name:
+        description: 商家名称
+        type: string
+      rate:
+        description: 通道汇率
+        type: integer
+    required:
+    - merchant_name
+    type: object
+  request.ReqUpdateMerchantSingleRate:
+    properties:
+      channel:
+        description: 通道名称
+        type: string
+      merchant_name:
+        description: 商家名称
+        type: string
+      rate:
+        description: 通道汇率
+        type: integer
+    required:
+    - merchant_name
+    type: object
+  request.ReqUpdateNotifyUrl:
+    properties:
+      notify_url:
+        description: 回调地址
+        type: string
+    required:
+    - notify_url
+    type: object
+  request.ReqUpdateReturnUrl:
+    properties:
+      return_url:
+        description: 返回地址
+        type: string
+    required:
+    - return_url
+    type: object
+  request.ReqUserLoginForm:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      password:
+        description: 密码
+        type: string
+      user_name:
+        description: 用户名
+        type: string
+    required:
+    - agency
+    - password
+    - user_name
+    type: object
+  request.ReqUserUpdateForm:
+    properties:
+      address:
+        description: 地址
+        type: string
+      full_name:
+        description: 姓名
+        type: string
+      phone_number:
+        description: 电话号码
+        type: string
+    type: object
+  response.RespAbnormalOrderInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.AbnormalOrder'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespAcceptorAllCardInfo:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.AcceptorCard'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespAcceptorCardInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.AcceptorCard'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespAcceptorInfo:
+    properties:
+      accept_switch:
+        description: 承兑开关(1：关闭，2：开启)
+        type: integer
+      available_amount:
+        description: 可用余额
+        type: integer
+      frozen_amount:
+        description: 冻结余额
+        type: integer
+      if_auto_accept:
+        description: 是否自动承兑（1：不自动，2：自动）
+        type: integer
+      total_amount:
+        description: 总余额
+        type: integer
+    type: object
+  response.RespAcceptorInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.Acceptor'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespAcceptorStatistics:
+    properties:
+      auto_accept_count:
+        description: 自动承兑开启
+        type: integer
+      on_line_count:
+        description: 当前在线
+        type: integer
+      today_accept_amount:
+        description: 今日承兑数额
+        type: integer
+      total_count:
+        description: 已有卡商
+        type: integer
+    type: object
+  response.RespAgencyStatistics:
+    properties:
+      acceptor_count:
+        description: 已有承兑
+        type: integer
+      fee_amount:
+        description: 手续费收入
+        type: integer
+      merchant_count:
+        description: 已有商家
+        type: integer
+      total_amount:
+        description: 承兑总数额
+        type: integer
+    type: object
+  response.RespApiCallUrl:
+    properties:
+      notify_url:
+        description: 商家接口回调url
+        type: string
+      return_url:
+        description: 商家接口返回url
+        type: string
+    type: object
+  response.RespBuyOrderInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.Order'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespChannelInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.Channel'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespConfirmPay:
+    properties:
+      expiration_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 过期时间
+    type: object
+  response.RespExistTradeKey:
+    properties:
+      exist:
+        description: true存在 false不存在
+        type: boolean
+    type: object
+  response.RespGetAcceptorGroup:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          type: string
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespGetFundInfo:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      available_amount:
+        description: 可用资金
+        type: integer
+      frozen_amount:
+        description: 冻结资金
+        type: integer
+      type:
+        description: 账户类型(1：系统资金账户  2：普通资金账户)
+        type: integer
+      user_name:
+        description: 用户名
+        type: string
+    type: object
+  response.RespGetKey:
+    properties:
+      private_key:
+        description: 私钥
+        type: string
+      public_key:
+        description: 公钥
+        type: string
+    type: object
+  response.RespGetOrderStatus:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      amount:
+        description: 金额
+        type: integer
+      card_account:
+        description: 卡账号
+        type: string
+      card_bank:
+        description: 银行
+        type: string
+      card_img:
+        description: 卡图片
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 银行支行
+        type: string
+      channel_type:
+        description: 通道类型= (BANK_CARD,ALIPAY,WECHAT)
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      current_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 服务器当前时间
+      expiration_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 过期时间
+      finish_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 订单完成时间
+      order_no:
+        description: 订单号
+        type: string
+      order_status:
+        description: 订单状态（1：创建，2：待支付，3：待放行，4：已取消  5：已失败  6：已完成）
+        type: integer
+      order_type:
+        description: 订单类型（1：转账，2：买入，3：卖出）
+        type: integer
+      returnUrl:
+        description: 返回地址
+        type: string
+    type: object
+  response.RespGetSellOrderUnprocessed:
+    properties:
+      unprocessed_count:
+        description: 未处理数
+        type: integer
+    type: object
+  response.RespInComeStatistics:
+    properties:
+      agency:
+        description: 代理
+        type: string
+      amount:
+        description: 涉及金额
+        type: integer
+      income_expenses_type:
+        description: 收支类型（1：支出，2：收入）
+        type: integer
+      username:
+        description: 已方交易账号
+        type: string
+    type: object
+  response.RespManagementInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.Management'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespManagementLogin:
+    properties:
+      role:
+        description: 角色
+        type: integer
+      rules:
+        description: 规则
+        type: string
+      token:
+        description: 凭证
+        type: string
+    type: object
+  response.RespMerchantCardInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.MerchantCard'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespMerchantInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.Merchant'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespOrderBuy:
+    properties:
+      card_account:
+        description: 卡账号
+        type: string
+      card_bank:
+        description: 银行
+        type: string
+      card_img:
+        description: 卡图片
+        type: string
+      card_no:
+        description: 卡号
+        type: string
+      card_sub_bank:
+        description: 银行支行
+        type: string
+      create_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 创建时间
+      current_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 服务器当前时间
+      expiration_time:
+        $ref: '#/definitions/util.JSONTime'
+        description: 过期时间
+      order_no:
+        description: 订单号
+        type: string
+    type: object
+  response.RespSellOrderInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.Order'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespUserBillList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.Bill'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespUserBillStatisticsList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.BillStatistics'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespUserByRoleBillStatistics:
+    properties:
+      accept_amount:
+        description: 承兑金额
+        type: integer
+      accept_count:
+        description: 承兑次数
+        type: integer
+      recharge_amount:
+        description: 充值金额
+        type: integer
+      recharge_count:
+        description: 充值次数
+        type: integer
+      withdrawal_amount:
+        description: 提现金额
+        type: integer
+      withdrawal_count:
+        description: 提现次数
+        type: integer
+    type: object
+  response.RespUserInfoList:
+    properties:
+      list:
+        description: 数据列表
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+      total:
+        description: 总数
+        type: integer
+    type: object
+  response.RespUserLogin:
+    properties:
+      role:
+        description: 角色 （1:代理，2：承兑人、3：商家）
+        type: integer
+      rules:
+        description: 规则
+        type: string
+      token:
+        description: 凭证
+        type: string
+    type: object
+  util.JSONTime:
+    properties:
+      time.Time:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: An example of gin
+  license:
+    name: MIT
+    url: https://Pay/blob/master/LICENSE
+  termsOfService: https://github.com/EDDYCJY/go-gin-example
+  title: Golang Gin API
+  version: "1.0"
+paths:
+  /api/v1/acceptor/acceptorDischarge:
+    post:
+      consumes:
+      - application/json
+      description: 放行
+      parameters:
+      - description: request.AcceptorDischargeForm
+        in: body
+        name: ReqAcceptorDischargeForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAcceptorDischargeForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 放行
+      tags:
+      - 承兑人
+  /api/v1/acceptor/addAbnormalOrder:
+    post:
+      consumes:
+      - application/json
+      description: 新建异常单
+      parameters:
+      - description: request.ReqAddAcceptorAbnormalOrderFrom
+        in: body
+        name: ReqAddAcceptorAbnormalOrderFrom
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAddAcceptorAbnormalOrderFrom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 新建异常单
+      tags:
+      - 承兑人
+  /api/v1/acceptor/addAcceptorCard:
+    post:
+      consumes:
+      - application/json
+      description: 增加承兑人收款方式
+      parameters:
+      - description: request.ReqAddAcceptorCardForm
+        in: body
+        name: ReqAddAcceptorCardForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAddAcceptorCardForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 增加承兑人收款方式
+      tags:
+      - 承兑人
+  /api/v1/acceptor/deleteAcceptorCard:
+    post:
+      consumes:
+      - application/json
+      description: 删除承兑人卡
+      parameters:
+      - description: card_id：卡id
+        in: body
+        name: ReqDeleteAcceptorCardForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqDeleteAcceptorCardForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 删除承兑人卡
+      tags:
+      - 承兑人
+  /api/v1/acceptor/getAbnormalOrderInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取承兑人异常单信息列表
+      parameters:
+      - description: 异常单ID
+        in: query
+        name: abnormal_order_id
+        type: string
+      - description: 异常类型（1：超时取消，2：未生成订单， 3：订单金额不符）
+        in: query
+        name: abnormal_order_type
+        type: integer
+      - description: 订单状态（1：未处理  2：已处理  3：处理中）
+        in: query
+        name: abnormal_order_status
+        type: integer
+      - description: 最大金额
+        in: query
+        name: max_amount
+        type: string
+      - description: 最小金额
+        in: query
+        name: min_amount
+        type: integer
+      - description: 开始时间
+        in: query
+        name: start_time
+        type: integer
+      - description: 结束时间
+        in: query
+        name: end_time
+        type: string
+      - description: 完成开始时间
+        in: query
+        name: finish_start_time
+        type: integer
+      - description: 完成结束时间
+        in: query
+        name: finish_end_time
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespAbnormalOrderInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取承兑人异常单信息列表
+      tags:
+      - 承兑人
+  /api/v1/acceptor/getAcceptorAllCardInfo:
+    get:
+      consumes:
+      - application/json
+      description: 获取当前承兑人所有卡信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespAcceptorAllCardInfo
+          schema:
+            $ref: '#/definitions/response.RespAcceptorAllCardInfo'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取当前承兑人所有卡信息
+      tags:
+      - 承兑人
+  /api/v1/acceptor/getAcceptorCardInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取承兑人卡列表
+      parameters:
+      - description: 卡类型
+        in: query
+        name: card_type
+        required: true
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        required: true
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespAcceptorCardInfoList
+          schema:
+            $ref: '#/definitions/response.RespAcceptorCardInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取承兑人卡列表
+      tags:
+      - 承兑人
+  /api/v1/acceptor/getAcceptorInfo:
+    get:
+      consumes:
+      - application/json
+      description: 获取承兑人信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespAcceptorInfo
+          schema:
+            $ref: '#/definitions/response.RespAcceptorInfo'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取承兑人信息
+      tags:
+      - 承兑人
+  /api/v1/acceptor/getBuyOrderInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 订单查询
+      parameters:
+      - description: 订单号
+        in: query
+        name: order_no
+        type: integer
+      - description: 订单状态
+        in: query
+        name: order_status
+        type: integer
+      - description: 交易通道(BANK_CARD,ALIPAY,WECHAT)
+        in: query
+        name: channel
+        type: string
+      - description: 最大金额
+        in: query
+        name: max_amount
+        type: string
+      - description: 最小金额
+        in: query
+        name: min_amount
+        type: string
+      - description: 开始时间
+        in: query
+        name: start_time
+        type: string
+      - description: 结束时间
+        in: query
+        name: end_time
+        type: string
+      - description: 完成开始时间
+        in: query
+        name: finish_start_time
+        type: string
+      - description: 完成结束时间
+        in: query
+        name: finish_end_time
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespBuyOrderInfoList
+          schema:
+            $ref: '#/definitions/response.RespBuyOrderInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 订单查询
+      tags:
+      - 承兑人
+  /api/v1/acceptor/updateAcceptSwitch:
+    post:
+      consumes:
+      - application/json
+      description: 更新承兑权限
+      parameters:
+      - description: request.ReqUpdateAcceptSwitchFrom
+        in: body
+        name: ReqUpdateAcceptSwitchFrom
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateAcceptSwitchFrom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新承兑权限
+      tags:
+      - 承兑人
+  /api/v1/acceptor/updateAcceptorCard:
+    post:
+      consumes:
+      - application/json
+      description: 更新承兑人卡信息
+      parameters:
+      - description: card_id：卡id card_account：卡账户名 card_bank：银行卡名称 card_sub_bank:支行
+          card_img:图片地址 signal_max_amt:单笔最大金额 day_max_amt:日最大金额
+        in: body
+        name: ReqUpdateAcceptorCardForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateAcceptorCardForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新承兑人卡信息
+      tags:
+      - 承兑人
+  /api/v1/acceptor/updateCardStatus:
+    post:
+      consumes:
+      - application/json
+      description: 更新承兑人卡状态
+      parameters:
+      - description: card_id:卡id if_open:是否开启在线
+        in: body
+        name: ReqUpdateCardStatusForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateCardStatusForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新承兑人卡状态
+      tags:
+      - 承兑人
+  /api/v1/acceptor/updateIfAutoAccept:
+    post:
+      consumes:
+      - application/json
+      description: 更新承兑权限
+      parameters:
+      - description: request.ReqUpdateIfAutoAcceptFrom
+        in: body
+        name: ReqUpdateIfAutoAcceptFrom
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateIfAutoAcceptFrom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新承兑权限
+      tags:
+      - 承兑人
+  /api/v1/agency/AddAcceptor:
+    post:
+      consumes:
+      - application/json
+      description: 增加承兑人
+      parameters:
+      - description: user_name:承兑人账户名 full_name:承兑人姓名 phone_number:电话号码 address:地址
+        in: body
+        name: ReqAddAcceptorForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAddAcceptorForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 增加承兑人
+      tags:
+      - 代理平台
+  /api/v1/agency/addMerchant:
+    post:
+      consumes:
+      - application/json
+      description: 添加商家
+      parameters:
+      - description: user_name:商家账户名 full_name:商家名称 phone_number:电话号码 address:地址
+        in: body
+        name: ReqAddMerchantForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAddMerchantForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 添加商家
+      tags:
+      - 代理平台
+  /api/v1/agency/againCallback:
+    post:
+      consumes:
+      - application/json
+      description: 代理再次回调商家
+      parameters:
+      - description: order_no:订单号
+        in: body
+        name: ReqAgencyDischargeForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyAgainCallback'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理再次回调商家
+      tags:
+      - 代理平台
+  /api/v1/agency/agencyDischarge:
+    post:
+      consumes:
+      - application/json
+      description: 代理放行订单
+      parameters:
+      - description: order_no:订单号
+        in: body
+        name: ReqAgencyDischargeForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyDischargeForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理放行订单
+      tags:
+      - 代理平台
+  /api/v1/agency/agencyDischargeCancelOrder:
+    post:
+      consumes:
+      - application/json
+      description: 代理放行超时取消的订单
+      parameters:
+      - description: order_no:订单号
+        in: body
+        name: ReqAgencyDischargeCancelOrderForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyDischargeCancelOrderForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理放行超时取消的订单
+      tags:
+      - 代理平台
+  /api/v1/agency/channelSwitch:
+    post:
+      consumes:
+      - application/json
+      description: 通道开关
+      parameters:
+      - description: channel_id:通道ID if_open:通道开关
+        in: body
+        name: ReqChannelSwitchForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqChannelSwitchForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 通道开关
+      tags:
+      - 代理平台
+  /api/v1/agency/channels:
+    get:
+      consumes:
+      - application/json
+      description: 获取代理的通道列表
+      parameters:
+      - description: 代理
+        in: query
+        name: agency
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespChannelInfoList
+          schema:
+            $ref: '#/definitions/response.RespChannelInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取代理的通道列表
+      tags:
+      - 用户
+  /api/v1/agency/confirmSellPay:
+    post:
+      consumes:
+      - application/json
+      description: 确认付款
+      parameters:
+      - description: request.ReqConfirmSellPayForm
+        in: body
+        name: ReqConfirmSellPayForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqConfirmSellPayForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 确认付款
+      tags:
+      - 代理平台
+  /api/v1/agency/getAbnormalOrderAcceptorGroup:
+    get:
+      consumes:
+      - application/json
+      description: 代理异常订单中所有承兑人的列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespGetAcceptorGroup'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理异常订单中所有承兑人的列表
+      tags:
+      - 代理平台
+  /api/v1/agency/getAbnormalOrderInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取代理异常单信息列表
+      parameters:
+      - description: 异常单ID
+        in: query
+        name: abnormal_order_id
+        required: true
+        type: string
+      - description: 异常类型（1：无，2：超时取消，3：未生成订单， 4：订单金额不符）
+        in: query
+        name: abnormal_order_type
+        required: true
+        type: integer
+      - description: 订单状态（1：未处理  2：已处理）
+        in: query
+        name: abnormal_order_status
+        required: true
+        type: integer
+      - description: 最大金额
+        in: query
+        name: max_amount
+        required: true
+        type: string
+      - description: 最小金额
+        in: query
+        name: min_amount
+        required: true
+        type: integer
+      - description: 开始时间
+        in: query
+        name: start_time
+        required: true
+        type: integer
+      - description: 结束时间
+        in: query
+        name: end_time
+        required: true
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        required: true
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespAbnormalOrderInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取代理异常单信息列表
+      tags:
+      - 代理平台
+  /api/v1/agency/getAcceptorBill:
+    get:
+      consumes:
+      - application/json
+      description: 代理获取转账给承兑人的账单
+      parameters:
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespUserBillList
+          schema:
+            $ref: '#/definitions/response.RespUserBillList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理获取转账给承兑人的账单
+      tags:
+      - 代理平台
+  /api/v1/agency/getAcceptorGroup:
+    get:
+      consumes:
+      - application/json
+      description: 代理订单中所有承兑人的列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespGetAcceptorGroup
+          schema:
+            $ref: '#/definitions/response.RespGetAcceptorGroup'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理订单中所有承兑人的列表
+      tags:
+      - 代理平台
+  /api/v1/agency/getAcceptorInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取承兑人信息列表
+      parameters:
+      - description: 起始页
+        in: query
+        name: start_page
+        required: true
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespAcceptorInfoList
+          schema:
+            $ref: '#/definitions/response.RespAcceptorInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取承兑人信息列表
+      tags:
+      - 代理平台
+  /api/v1/agency/getAcceptorStatistics:
+    get:
+      consumes:
+      - application/json
+      description: 承兑管理统计
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespAcceptorStatistics
+          schema:
+            $ref: '#/definitions/response.RespAcceptorStatistics'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 承兑管理统计
+      tags:
+      - 代理平台
+  /api/v1/agency/getAgencyStatistics:
+    get:
+      consumes:
+      - application/json
+      description: 代理平台统计
+      parameters:
+      - description: 开始日期 yyyy-mm-dd hh:mm:ss
+        in: query
+        name: start_time
+        type: integer
+      - description: 结束日期 yyyy-mm-dd hh:mm:ss
+        in: query
+        name: end_time
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespAgencyStatistics
+          schema:
+            $ref: '#/definitions/response.RespAgencyStatistics'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理平台统计
+      tags:
+      - 代理平台
+  /api/v1/agency/getChannelInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取代理的通道信息列表
+      parameters:
+      - description: 起始页
+        in: query
+        name: start_page
+        required: true
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespChannelInfoList
+          schema:
+            $ref: '#/definitions/response.RespChannelInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取代理的通道信息列表
+      tags:
+      - 代理平台
+  /api/v1/agency/getMerchantInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取商家信息列表
+      parameters:
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespMerchantInfoList
+          schema:
+            $ref: '#/definitions/response.RespMerchantInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取商家信息列表
+      tags:
+      - 代理平台
+  /api/v1/agency/getMerchantKey:
+    post:
+      consumes:
+      - application/json
+      description: 代理查看商家秘钥
+      parameters:
+      - description: request.ReqAgencyGetMerchantKeyForm
+        in: body
+        name: ReqAgencyGetMerchantKeyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyGetMerchantKeyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespGetKey'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理查看商家秘钥
+      tags:
+      - 代理平台
+  /api/v1/agency/getMerchantStatistics:
+    get:
+      consumes:
+      - application/json
+      description: 商家管理统计
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespAcceptorStatistics
+          schema:
+            $ref: '#/definitions/response.RespAcceptorStatistics'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 商家管理统计
+      tags:
+      - 代理平台
+  /api/v1/agency/getOrderInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 订单查询
+      parameters:
+      - description: 订单ID
+        in: query
+        name: order_id
+        type: integer
+      - description: 订单状态
+        in: query
+        name: order_status
+        type: integer
+      - description: 交易通道(BANK_CARD,ALIPAY,WECHAT)
+        in: query
+        name: channel
+        type: string
+      - description: 最大金额
+        in: query
+        name: max_amount
+        type: string
+      - description: 最小金额
+        in: query
+        name: min_amount
+        type: string
+      - description: 开始时间
+        in: query
+        name: start_time
+        type: string
+      - description: 结束时间
+        in: query
+        name: end_time
+        type: string
+      - description: 所属承兑人
+        in: query
+        name: acceptor_name
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespBuyOrderInfoList
+          schema:
+            $ref: '#/definitions/response.RespBuyOrderInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 订单查询
+      tags:
+      - 代理平台
+  /api/v1/agency/getSellOrderInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 代理卖单列表
+      parameters:
+      - description: 订单号
+        in: query
+        name: order_no
+        type: integer
+      - description: 订单状态
+        in: query
+        name: order_status
+        type: integer
+      - description: 交易通道(BANK_CARD,ALIPAY,WECHAT)
+        in: query
+        name: channel
+        type: string
+      - description: 最大金额
+        in: query
+        name: max_amount
+        type: string
+      - description: 最小金额
+        in: query
+        name: min_amount
+        type: string
+      - description: 开始时间
+        in: query
+        name: start_time
+        type: string
+      - description: 结束时间
+        in: query
+        name: end_time
+        type: string
+      - description: 完成开始时间
+        in: query
+        name: finish_start_time
+        type: string
+      - description: 完成结束时间
+        in: query
+        name: finish_end_time
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespSellOrderInfoList
+          schema:
+            $ref: '#/definitions/response.RespSellOrderInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理卖单列表
+      tags:
+      - 代理平台
+  /api/v1/agency/getSellOrderUnprocessed:
+    get:
+      consumes:
+      - application/json
+      description: 代理卖单未处理数
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespGetSellOrderUnprocessed
+          schema:
+            $ref: '#/definitions/response.RespGetSellOrderUnprocessed'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理卖单未处理数
+      tags:
+      - 代理平台
+  /api/v1/agency/getUserBillStatistics:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户每日账单统计
+      parameters:
+      - description: 用户名
+        in: query
+        name: username
+        required: true
+        type: integer
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      - description: 开始日期
+        in: query
+        name: start_date
+        type: integer
+      - description: 结束日期
+        in: query
+        name: end_date
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespUserBillStatisticsList
+          schema:
+            $ref: '#/definitions/response.RespUserBillStatisticsList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取用户每日账单统计
+      tags:
+      - 代理平台
+  /api/v1/agency/getUserByRoleBillStatistics:
+    get:
+      consumes:
+      - application/json
+      description: 商家数据统计和承兑人数据统计
+      parameters:
+      - description: 角色(2：承兑人、3：商家)
+        in: query
+        name: role
+        required: true
+        type: integer
+      - description: 用户名
+        in: query
+        name: username
+        type: integer
+      - description: 开始日期
+        in: query
+        name: start_date
+        type: integer
+      - description: 结束日期
+        in: query
+        name: end_date
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespUserByRoleBillStatistics
+          schema:
+            $ref: '#/definitions/response.RespUserByRoleBillStatistics'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 商家数据统计和承兑人数据统计
+      tags:
+      - 代理平台
+  /api/v1/agency/latelyTransferInfo:
+    get:
+      consumes:
+      - application/json
+      description: 代理最近转账信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespUserBillList
+          schema:
+            $ref: '#/definitions/response.RespUserBillList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理最近转账信息
+      tags:
+      - 代理平台
+  /api/v1/agency/removeMerchant:
+    post:
+      consumes:
+      - application/json
+      description: 删除商家
+      parameters:
+      - description: user_name:商家账户名
+        in: body
+        name: ReqRemoveMerchantForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqRemoveMerchantForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 删除商家
+      tags:
+      - 代理平台
+  /api/v1/agency/resetUserPassword:
+    post:
+      consumes:
+      - application/json
+      description: 重置代理下的用户密码
+      parameters:
+      - description: username:用户名
+        in: body
+        name: ReqAgencyResetUserPasswordForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyResetUserPasswordForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 重置代理下的用户密码
+      tags:
+      - 代理平台
+  /api/v1/agency/resetUserTradeKey:
+    post:
+      consumes:
+      - application/json
+      description: 重置代理下的用户资金交易密码
+      parameters:
+      - description: username:用户名
+        in: body
+        name: ReqAgencyResetUserTradeKeyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyResetUserTradeKeyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 重置代理下的用户资金交易密码
+      tags:
+      - 代理平台
+  /api/v1/agency/transfer:
+    post:
+      consumes:
+      - application/json
+      description: 代理转账
+      parameters:
+      - description: request.ReqAgencyTransferForm
+        in: body
+        name: ReqAgencyTransferForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyTransferForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理转账
+      tags:
+      - 代理平台
+  /api/v1/agency/updateAbnormalOrder:
+    post:
+      consumes:
+      - application/json
+      description: 更新异常单生成订单
+      parameters:
+      - description: request.ReqUpdateAbnormalOrderFrom
+        in: body
+        name: ReqUpdateAbnormalOrderFrom
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateAbnormalOrderFrom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新异常单生成订单
+      tags:
+      - 代理平台
+  /api/v1/agency/updateAcceptStatus:
+    post:
+      consumes:
+      - application/json
+      description: 代理更新承兑账户状态
+      parameters:
+      - description: request.ReqAgencyUpdateAcceptStatusFrom
+        in: body
+        name: ReqAgencyUpdateAcceptStatusFrom
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyUpdateAcceptStatusFrom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理更新承兑账户状态
+      tags:
+      - 代理
+  /api/v1/agency/updateAcceptSwitch:
+    post:
+      consumes:
+      - application/json
+      description: 代理更新承兑权限
+      parameters:
+      - description: request.ReqAgencyUpdateAcceptSwitchFrom
+        in: body
+        name: ReqAgencyUpdateAcceptSwitchFrom
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyUpdateAcceptSwitchFrom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理更新承兑权限
+      tags:
+      - 代理
+  /api/v1/agency/updateAllLimitAmount:
+    post:
+      consumes:
+      - application/json
+      description: 统一更新每日承兑上限
+      parameters:
+      - description: 'limit_amount:每日承兑上限金额 '
+        in: body
+        name: ReqUpdateAllLimitAmountForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateAllLimitAmountForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 统一更新每日承兑上限
+      tags:
+      - 代理平台
+  /api/v1/agency/updateIfAutoAccept:
+    post:
+      consumes:
+      - application/json
+      description: 代理更新承兑权限
+      parameters:
+      - description: request.ReqAgencyUpdateIfAutoAcceptFrom
+        in: body
+        name: ReqAgencyUpdateIfAutoAcceptFrom
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAgencyUpdateIfAutoAcceptFrom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 代理更新承兑权限
+      tags:
+      - 代理
+  /api/v1/agency/updateLimitAmount:
+    post:
+      consumes:
+      - application/json
+      description: 更新每日承兑上限
+      parameters:
+      - description: 'id:通道ID limit_amount:每日承兑上限金额 '
+        in: body
+        name: ReqUpdateLimitAmountForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateLimitAmountForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新每日承兑上限
+      tags:
+      - 代理平台
+  /api/v1/agency/updateMerchantAllChannelRate:
+    post:
+      consumes:
+      - application/json
+      description: 统一更新通道汇率
+      parameters:
+      - description: request.ReqUpdateMerchantAllChannelRate
+        in: body
+        name: ReqUpdateMerchantAllChannelRate
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateMerchantAllChannelRate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 统一更新通道汇率
+      tags:
+      - 代理平台
+  /api/v1/agency/updateMerchantSingleRate:
+    post:
+      consumes:
+      - application/json
+      description: 更新通道汇率
+      parameters:
+      - description: request.ReqUpdateMerchantSingleRate
+        in: body
+        name: ReqUpdateMerchantSingleRate
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateMerchantSingleRate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新通道汇率
+      tags:
+      - 代理平台
+  /api/v1/agencyList:
+    get:
+      consumes:
+      - application/json
+      description: 获取代理组
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取代理组
+      tags:
+      - 用户
+  /api/v1/backend/management/backendAddAgency:
+    post:
+      consumes:
+      - application/json
+      description: 添加代理用户
+      parameters:
+      - description: request.ReqAddAgencyUserForm
+        in: body
+        name: ReqAddAgencyUserForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAddAgencyUserForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 添加代理用户
+      tags:
+      - 后台管理
+  /api/v1/backend/management/getManagementInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取后台管理员信息列表
+      parameters:
+      - description: 代理
+        in: query
+        name: agency
+        required: true
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        required: true
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespManagementInfoList
+          schema:
+            $ref: '#/definitions/response.RespManagementInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取后台管理员信息列表
+      tags:
+      - 后台管理
+  /api/v1/backend/management/getUserInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户信息列表人
+      parameters:
+      - description: 代理 所属系统 默认admin
+        in: query
+        name: agency
+        required: true
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        required: true
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespUserInfoList
+          schema:
+            $ref: '#/definitions/response.RespUserInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取用户信息列表
+      tags:
+      - 后台管理
+  /api/v1/backend/management/login:
+    post:
+      consumes:
+      - application/json
+      description: 后台管理登录
+      parameters:
+      - description: 'user_name:用户名  password:密码 '
+        in: body
+        name: ReqManagementLoginForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqManagementLoginForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespManagementLogin'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 后台管理登录
+      tags:
+      - 后台管理
+  /api/v1/backend/management/modifyPassword:
+    post:
+      consumes:
+      - application/json
+      description: 修改登录密码
+      parameters:
+      - description: agency代理 所属系统 默认admin
+        in: body
+        name: agency
+        required: true
+        schema:
+          $ref: '#/definitions/management.modifyPasswordForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 修改登录密码
+      tags:
+      - 后台管理
+  /api/v1/backend/management/transfer:
+    post:
+      consumes:
+      - application/json
+      description: 系统转账
+      parameters:
+      - description: request.ReqSysTransferForm
+        in: body
+        name: ReqSysTransferForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqSysTransferForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 系统转账
+      tags:
+      - 后台管理
+  /api/v1/backend/management/updateManagementInfo:
+    post:
+      consumes:
+      - application/json
+      description: 更新后台管理员账号信息
+      parameters:
+      - description: 代理 所属系统 默认admin
+        in: body
+        name: agency
+        required: true
+        schema:
+          $ref: '#/definitions/management.updateManagementInfoForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新后台管理员账号信息
+      tags:
+      - 后台管理
+  /api/v1/fund/bill/getUserBillList:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户账单
+      parameters:
+      - description: 账单号
+        in: query
+        name: bill_no
+        type: string
+      - description: 对方交易账户
+        in: query
+        name: opposite_user_name
+        type: string
+      - description: 收支类型（1：支出，2：收入）
+        in: query
+        name: income_expenses_type
+        type: integer
+      - description: 开始日期 yyyy-mm-dd hh:mm:ss
+        in: query
+        name: start_time
+        type: integer
+      - description: 结束日期 yyyy-mm-dd hh:mm:ss
+        in: query
+        name: end_time
+        type: string
+      - description: 最大金额
+        in: query
+        name: max_amount
+        type: integer
+      - description: 最小金额
+        in: query
+        name: min_amount
+        type: integer
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespUserBillList
+          schema:
+            $ref: '#/definitions/response.RespUserBillList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取用户账单
+      tags:
+      - 资金
+  /api/v1/fund/bill/inComeStatistics:
+    get:
+      consumes:
+      - application/json
+      description: 获取收入/支出统计信息
+      parameters:
+      - description: 收支类型（1：支出，2：收入）
+        in: query
+        name: income_expenses_type
+        required: true
+        type: integer
+      - description: 开始日期 yyyy-mm-dd hh:mm:ss
+        in: query
+        name: start_time
+        type: integer
+      - description: 结束日期 yyyy-mm-dd hh:mm:ss
+        in: query
+        name: end_time
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespInComeStatistics
+          schema:
+            $ref: '#/definitions/response.RespInComeStatistics'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取收入/支出统计信息
+      tags:
+      - 资金
+  /api/v1/fund/getFundInfo:
+    get:
+      consumes:
+      - application/json
+      description: 获取资金账户金额信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespGetFundInfo
+          schema:
+            $ref: '#/definitions/response.RespGetFundInfo'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取资金账户金额信息
+      tags:
+      - 资金
+  /api/v1/login:
+    post:
+      consumes:
+      - application/json
+      description: 登录
+      parameters:
+      - description: agency:代理 userName:用户名  password:密码
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUserLoginForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespUserLogin'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 登录
+      tags:
+      - 用户
+  /api/v1/merchant/addMerchantCard:
+    post:
+      consumes:
+      - application/json
+      description: 添加卡信息
+      parameters:
+      - description: request.ReqAddMerchantCard
+        in: body
+        name: ReqAddMerchantCard
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqAddMerchantCard'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 添加卡信息
+      tags:
+      - 商家
+  /api/v1/merchant/cancelSell:
+    post:
+      consumes:
+      - application/json
+      description: 取消卖单
+      parameters:
+      - description: order_no:订单号
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqCancelSellForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 取消卖单
+      tags:
+      - 商家
+  /api/v1/merchant/getApiCallUrl:
+    get:
+      consumes:
+      - application/json
+      description: 获取对接回调，返回地址
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespApiCallUrl
+          schema:
+            $ref: '#/definitions/response.RespApiCallUrl'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取对接回调，返回地址
+      tags:
+      - 商家
+  /api/v1/merchant/getBuyOrderInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 买入订单查询
+      parameters:
+      - description: 订单号
+        in: query
+        name: order_no
+        type: integer
+      - description: 交易通道(BANK_CARD,ALIPAY,WECHAT)
+        in: query
+        name: channel
+        type: string
+      - description: 最大金额
+        in: query
+        name: max_amount
+        type: string
+      - description: 最小金额
+        in: query
+        name: min_amount
+        type: string
+      - description: 开始时间
+        in: query
+        name: start_time
+        type: string
+      - description: 结束时间
+        in: query
+        name: end_time
+        type: string
+      - description: 完成开始时间
+        in: query
+        name: finish_start_time
+        type: string
+      - description: 完成结束时间
+        in: query
+        name: finish_end_time
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespBuyOrderInfoList
+          schema:
+            $ref: '#/definitions/response.RespBuyOrderInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 买入订单查询
+      tags:
+      - 商家
+  /api/v1/merchant/getKey:
+    post:
+      consumes:
+      - application/json
+      description: 查看私钥
+      parameters:
+      - description: request.ReqGetKeyForm
+        in: body
+        name: ReqGetKeyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqGetKeyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespGetKey'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 查看私钥
+      tags:
+      - 商家
+  /api/v1/merchant/getMerchantCardList:
+    get:
+      consumes:
+      - application/json
+      description: 获取商家卡信息列表
+      parameters:
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespMerchantCardInfoList
+          schema:
+            $ref: '#/definitions/response.RespMerchantCardInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取商家卡信息列表
+      tags:
+      - 商家
+  /api/v1/merchant/getSellOrderInfoList:
+    get:
+      consumes:
+      - application/json
+      description: 卖出订单查询
+      parameters:
+      - description: 订单号
+        in: query
+        name: order_no
+        type: integer
+      - description: 订单状态
+        in: query
+        name: order_status
+        type: integer
+      - description: 交易通道(BANK_CARD,ALIPAY,WECHAT)
+        in: query
+        name: channel
+        type: string
+      - description: 最大金额
+        in: query
+        name: max_amount
+        type: string
+      - description: 最小金额
+        in: query
+        name: min_amount
+        type: string
+      - description: 开始时间
+        in: query
+        name: start_time
+        type: string
+      - description: 结束时间
+        in: query
+        name: end_time
+        type: string
+      - description: 完成开始时间
+        in: query
+        name: finish_start_time
+        type: string
+      - description: 完成结束时间
+        in: query
+        name: finish_end_time
+        type: string
+      - description: 起始页
+        in: query
+        name: start_page
+        type: integer
+      - description: 页面大小
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespSellOrderInfoList
+          schema:
+            $ref: '#/definitions/response.RespSellOrderInfoList'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 卖出订单查询
+      tags:
+      - 商家
+  /api/v1/merchant/merchantDischargeSell:
+    post:
+      consumes:
+      - application/json
+      description: 商家放行卖单
+      parameters:
+      - description: request.ReqMerchantDischargeSellForm
+        in: body
+        name: ReqMerchantDischargeSellForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqMerchantDischargeSellForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 商家放行卖单
+      tags:
+      - 商家
+  /api/v1/merchant/removeMerchantCard:
+    post:
+      consumes:
+      - application/json
+      description: 删除卡信息
+      parameters:
+      - description: request.ReqRemoveMerchantCard
+        in: body
+        name: ReqRemoveMerchantCard
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqRemoveMerchantCard'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 删除卡信息
+      tags:
+      - 商家
+  /api/v1/merchant/sell:
+    post:
+      consumes:
+      - application/json
+      description: 卖出
+      parameters:
+      - description: request.ReqSellForm
+        in: body
+        name: ReqSellForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqSellForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 卖出
+      tags:
+      - 商家
+  /api/v1/merchant/updateNotifyUrl:
+    post:
+      consumes:
+      - application/json
+      description: 修改回调地址
+      parameters:
+      - description: request.ReqUpdateNotifyUrl
+        in: body
+        name: ReqUpdateNotifyUrl
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateNotifyUrl'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 修改回调地址
+      tags:
+      - 商家
+  /api/v1/merchant/updateReturnUrl:
+    post:
+      consumes:
+      - application/json
+      description: 修改返回地址
+      parameters:
+      - description: request.ReqUpdateReturnUrl
+        in: body
+        name: ReqUpdateReturnUrl
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUpdateReturnUrl'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 修改返回地址
+      tags:
+      - 商家
+  /api/v1/order/buy:
+    post:
+      consumes:
+      - application/json
+      description: 买入
+      parameters:
+      - description: request.ReqBuyForm
+        in: body
+        name: ReqBuyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqBuyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespOrderBuy'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 买入
+      tags:
+      - 订单
+  /api/v1/order/cancelBuy:
+    post:
+      consumes:
+      - application/json
+      description: 取消买单
+      parameters:
+      - description: request.ReqCancelBuyForm
+        in: body
+        name: ReqCancelBuyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqCancelBuyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 取消买单
+      tags:
+      - 订单
+  /api/v1/order/confirmPay:
+    post:
+      consumes:
+      - application/json
+      description: 确认付款
+      parameters:
+      - description: order_no:订单号
+        in: body
+        name: ReqConfirmPayForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqConfirmPayForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespConfirmPay'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 确认付款
+      tags:
+      - 订单
+  /api/v1/order/getStatusByOrderNo:
+    get:
+      consumes:
+      - application/json
+      description: 订单状态查询
+      parameters:
+      - description: 代理
+        in: query
+        name: agency
+        type: string
+      - description: 订单号
+        in: query
+        name: order_no
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: response.RespGetOrderStatus
+          schema:
+            $ref: '#/definitions/response.RespGetOrderStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 订单状态查询
+      tags:
+      - 订单
+  /api/v1/upload/image:
+    post:
+      parameters:
+      - description: Image File
+        in: formData
+        name: image
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 图片上传
+  /api/v1/user/existTradeKey:
+    get:
+      consumes:
+      - application/json
+      description: 是否存在交易密码
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespExistTradeKey'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 是否存在交易密码
+      tags:
+      - 用户
+  /api/v1/user/getUserInfo:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 获取用户信息
+      tags:
+      - 用户
+  /api/v1/user/modifyPassword:
+    post:
+      consumes:
+      - application/json
+      description: 修改登录密码
+      parameters:
+      - description: original_password:原始密码 update_password:更新密码
+        in: body
+        name: ReqPasswordModifyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqPasswordModifyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 修改登录密码
+      tags:
+      - 用户
+  /api/v1/user/modifyTradeKey:
+    post:
+      consumes:
+      - application/json
+      description: 修改交易密码
+      parameters:
+      - description: original_trade_password:原始交易密码 update_trade_password:更新交易密码
+        in: body
+        name: ReqTradeKeyModifyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqTradeKeyModifyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 修改交易密码
+      tags:
+      - 用户
+  /api/v1/user/settingTradeKey:
+    post:
+      consumes:
+      - application/json
+      description: 设置交易密码
+      parameters:
+      - description: request.ReqSettingTradeKeyForm
+        in: body
+        name: ReqSettingTradeKeyForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqSettingTradeKeyForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 设置交易密码
+      tags:
+      - 用户
+  /api/v1/user/updateUserInfo:
+    post:
+      consumes:
+      - application/json
+      description: 更新用户信息
+      parameters:
+      - description: phone_number:电话号码 full_name:姓名 address:地址
+        in: body
+        name: ReqUserUpdateForm
+        required: true
+        schema:
+          $ref: '#/definitions/request.ReqUserUpdateForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.Response'
+      summary: 更新用户信息
+      tags:
+      - 用户
+swagger: "2.0"

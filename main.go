@@ -7,7 +7,6 @@ import (
 	"QuickPass/pkg/logf"
 	"QuickPass/pkg/mq"
 	"QuickPass/pkg/setting"
-	"QuickPass/pkg/upload"
 	"QuickPass/pkg/util"
 	vali "QuickPass/pkg/validation"
 	"QuickPass/routers"
@@ -20,7 +19,7 @@ import (
 func init() {
 	setting.Setup()
 	logf.Setup()
-	upload.SetUp()
+	//upload.SetUp()
 	models.Setup()
 	util.Setup()
 	gredis.Setup()
