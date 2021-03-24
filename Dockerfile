@@ -13,7 +13,7 @@ WORKDIR /app
 RUN mkdir conf
 COPY --from=build-stage /app/quickpass .
 COPY --from=build-stage /app/conf/* /app/conf/
-RUN rm /app/conf/app.ini && mv /app/conf/app_iopay666.ini /app/conf/app.ini
+RUN rm /app/conf/app.ini && mv /app/conf/local_docker.ini /app/conf/app.ini
 RUN echo 'http://mirrors.ustc.edu.cn/alpine/v3.5/main' > /etc/apk/repositories \
     && echo 'http://mirrors.ustc.edu.cn/alpine/v3.5/community' >>/etc/apk/repositories \
     && apk update \

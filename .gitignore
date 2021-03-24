@@ -21,4 +21,6 @@ output/
 # runtime
 runtime/
 
+#conf
 conf/app.ini
+conf/local_docker.ini
