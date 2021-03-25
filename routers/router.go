@@ -26,6 +26,7 @@ import (
 	"strings"
 	"time"
 
+	_ "QuickPass/docs"
 	"QuickPass/routers/api/v1/acceptor"
 	"QuickPass/routers/api/v1/merchant"
 	"QuickPass/routers/api/v1/user"
